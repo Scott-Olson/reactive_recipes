@@ -23,7 +23,10 @@ app.listen(port, () => {
 
 // get all recipes
 app.get("/", (req, res) => {
-	console.log("Get all recipes");
+	res.json({
+		status: "success",
+		recipes: []
+	})
 });
 
 app.get("/", (req, res) => {
