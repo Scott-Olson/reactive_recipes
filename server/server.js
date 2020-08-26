@@ -10,37 +10,41 @@ const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
 // path middleware
 const path = require('path');
+// postgres connection
+const db = require("./db");
 
 const app = express();
 
-app.use((req, res, next) => {
-	console.log("hit the middleware");
-	next();
-});
+app.use(morgan("dev"));
+
+app.use(express.json());
 
 const port = process.env.PORT || 4001;
 
 
 // get all recipes
-app.get("/api/recipes", (req, res) => {
+app.get("/api/recipes", async (req, res) => {
 	console.log("Get all recipes");
-	res.json({
+
+	const recipes = await db.query("select * from recipes");
+
+	res.status(200).json({
 		status: "success, get landing",
 		data: {
-			recipes: [],
+			recipes: [recipes.rows],
 			code: []
 		}
 	});
 });
 
 // get a recipe by an id
-app.get("/api/recipes/:id", (req, res) => {
+app.get("/api/recipes/:id", async (req, res) => {
 	console.log("Get recipe by id");
 	console.log(req.params);
-	res.json({
+	res.status(200).json({
 		status: "success, get by id",
 		data: {
-			recipes: [],
+			recipes: [req.params],
 			code: []
 		}
 	});
@@ -49,10 +53,34 @@ app.get("/api/recipes/:id", (req, res) => {
 // create a recipe
 app.post("/api/recipes", (req, res) => {
 	console.log(req.query);
-	res.json({
+	res.status(201).json({
 		status: "success, create",
 		data: {
 			query: req.query,
+			code: []
+		}
+	});
+});
+
+// update recipe
+app.put("/api/recipes/:id", (req, res) => {
+	console.log(req);
+	res.status(200).json({
+		status: "success, update",
+		data: {
+			query: req.params,
+			code: []
+		}
+	});
+});
+
+// delete recipe
+app.delete("/api/recipes/:id", (req, res) => {
+	console.log("In delete");
+	res.status(204).json({
+		status: "success, delete",
+		data: {
+			query: req.params,
 			code: []
 		}
 	});
