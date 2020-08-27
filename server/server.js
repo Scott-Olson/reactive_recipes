@@ -98,6 +98,35 @@ app.post("/api/recipes", async (req, res) => {
 	}
 });
 
+// get recipe for update
+app.get("/api/recipes/:id/update", async (req, res) => {
+	console.log("Get recipe by id for update");
+
+	try {
+		// parameterized query
+		const results = await db.query("select * from recipes where id = $1", [req.params.id]);
+
+		res.status(200).json({
+			status: "success, get by id for update",
+			results: results.rows.length,
+			data: {
+				recipes: results.rows,
+				code: []
+			}
+		});
+
+	} catch (err) {
+		res.status(500).json({
+			status: "none found, get id",
+			results: 0,
+			data: {
+				recipes: [],
+				code: []
+			}
+		});
+	}
+});
+
 // update recipe
 app.put("/api/recipes/:id", async (req, res) => {
 	console.log(req.query)
