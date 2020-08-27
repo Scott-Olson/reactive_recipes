@@ -9,9 +9,9 @@ PERN stack: PostgresQL, Express, React, Node
 
 ## To Do List
 - [x] Stand up a node/express server
-- [ ] Create routes for api
-- [ ] Build Postgres tables
-- [ ] React setup
+- [x] Create routes for api
+- [x] Build Postgres tables
+- [x] React setup
 - [ ] Landing page
 - [ ] Detail page
 - [ ] Login/Regestration
