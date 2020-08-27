@@ -13,9 +13,13 @@ const path = require('path');
 // postgres connection
 const db = require("./db");
 
+const cors = require("cors");
+
 const app = express();
 
 app.use(morgan("dev"));
+
+app.use(cors());
 
 app.use(express.json());
 

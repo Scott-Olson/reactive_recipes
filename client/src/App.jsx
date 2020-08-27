@@ -4,18 +4,23 @@ import Home from "./routes/Home";
 import UpdatePage from "./routes/UpdatePage";
 import RecipeDetail from "./routes/RecipeDetail";
 import NewRecipe from "./routes/NewRecipe";
+import { RecipesContextProvider } from './context/RecipesContext';
 
 const App = () => {
-    return <div>
-        <Router>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/recipes/:id/update" component={UpdatePage} />
-                <Route exact path="/recipes/new" component={NewRecipe} />
-                <Route exact path="/recipes/:id" component={RecipeDetail} />
-            </Switch>
-        </Router>
-    </div>;
+    return (
+        <RecipesContextProvider>
+            <div className="container">
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/recipes/:id/update" component={UpdatePage} />
+                        <Route exact path="/recipes/new" component={NewRecipe} />
+                        <Route exact path="/recipes/:id" component={RecipeDetail} />
+                    </Switch>
+                </Router>
+            </div>
+        </RecipesContextProvider>
+    );
 };
 
 
