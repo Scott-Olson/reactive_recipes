@@ -17,3 +17,5 @@ PERN stack: PostgresQL, Express, React, Node
 - [ ] Login/Regestration
 
 
+## Features / Ideas
+*edamam.com* -> a recipe API, could be used for discovery
